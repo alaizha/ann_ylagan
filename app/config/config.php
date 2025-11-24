@@ -90,6 +90,11 @@ $config['base_url'] = 'https://ann-ylagan.onrender.com';
 |
 */
 $config['index_page']               = '';
+$config['protocol'] = 'smtp';
+
+$config['mailtype'] = 'html';
+$config['charset'] = 'utf-8';
+
 
 /*
 |--------------------------------------------------------------------------
