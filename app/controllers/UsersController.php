@@ -322,50 +322,46 @@ class UsersController extends Controller {
     }
 
     // ==============================
-// ✉️ SEND VERIFICATION EMAIL
-// ==============================
-private function _sendVerificationEmail($userId, $toEmail, $toName) {
-    if (!class_exists('PHPMailer\PHPMailer\PHPMailer')) {
-        $autoloadPath = __DIR__ . '/../../vendor/autoload.php';
-        if (file_exists($autoloadPath)) require_once $autoloadPath;
+    // ✉️ SEND VERIFICATION EMAIL
+    // ==============================
+    private function _sendVerificationEmail($userId, $toEmail, $toName) {
+        if (!class_exists('PHPMailer\PHPMailer\PHPMailer')) {
+            $autoloadPath = __DIR__ . '/../../vendor/autoload.php';
+            if (file_exists($autoloadPath)) require_once $autoloadPath;
+        }
+
+        if (!class_exists('PHPMailer\PHPMailer\PHPMailer')) return false;
+
+        try {
+            $mail = new PHPMailer(true);
+            $mail->isSMTP();
+            $mail->Host = $this->smtpHost;
+            $mail->SMTPAuth = true;
+            $mail->Username = $this->smtpUser;
+            $mail->Password = $this->smtpPass;
+            $mail->SMTPSecure = $this->smtpSecure;
+            $mail->Port = $this->smtpPort;
+
+            $mail->setFrom($this->fromEmail, $this->fromName);
+            $mail->addAddress($toEmail, $toName);
+
+            $mail->isHTML(true);
+            $mail->Subject = 'Please verify your email';
+            $verifyLink = site_url("auth/verify/{$userId}");
+            $mail->Body = "
+                <p>Hi " . htmlspecialchars($toName) . ",</p>
+                <p>Thank you for registering. Please click the link below to verify your email:</p>
+                <p><a href='{$verifyLink}'>Verify my email</a></p>
+                <p>If the link doesn't work, copy & paste this URL into your browser: {$verifyLink}</p>
+                <p>— {$this->fromName}</p>
+            ";
+            $mail->AltBody = "Hi {$toName},\nPlease verify your email: {$verifyLink}\n— {$this->fromName}";
+
+            $mail->send();
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
     }
-
-    if (!class_exists('PHPMailer\PHPMailer\PHPMailer')) return false;
-
-    try {
-        $mail = new PHPMailer(true);
-        $mail->isSMTP();
-        $mail->Host = $this->smtpHost;
-        $mail->SMTPAuth = true;
-        $mail->Username = $this->smtpUser;
-        $mail->Password = $this->smtpPass;
-        $mail->SMTPSecure = $this->smtpSecure;
-        $mail->Port = $this->smtpPort;
-
-        $mail->setFrom($this->fromEmail, $this->fromName);
-        $mail->addAddress($toEmail, $toName);
-
-        $mail->isHTML(true);
-        $mail->Subject = 'Please verify your email';
-
-        // ⭐ FIXED HERE
-        $verifyLink = site_url("users/verify/{$userId}");
-
-        $mail->Body = "
-            <p>Hi " . htmlspecialchars($toName) . ",</p>
-            <p>Thank you for registering. Please click the link below to verify your email:</p>
-            <p><a href='{$verifyLink}'>Verify my email</a></p>
-            <p>If the link doesn't work, copy & paste this URL into your browser: {$verifyLink}</p>
-            <p>— {$this->fromName}</p>
-        ";
-        $mail->AltBody = "Hi {$toName},\nPlease verify your email: {$verifyLink}\n— {$this->fromName}";
-
-        $mail->send();
-        return true;
-    } catch (Exception $e) {
-        return false;
-    }
-}
-
 }
 ?>
