@@ -78,7 +78,7 @@ $config['ENVIRONMENT']             = 'development';
 | WARNING: You MUST set this value!
 |
 */
-$config['base_url'] = 'https://ann-ylagan.onrender.com';
+$config['base_url'] = 'http://ann-ylagan.onrender.com/index.php';
 
 /*
 |--------------------------------------------------------------------------
