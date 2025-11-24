@@ -58,10 +58,10 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 */
 
    $database['main'] = array(
-        'driver'	=> 'sql12.freesqldatabase.com',
-        'hostname'	=> 'sql12809110',
+        'driver'	=> 'mysql',
+        'hostname'	=> 'sql12.freesqldatabase.com',
         'port'		=> '3306',
-        'username'	=> 'root',
+        'username'	=> 'sql12809110',
         'password'	=> '8yECb1f9WE',
         'database'	=> 'sql12809110',
         'charset'	=> 'utf8mb4',
