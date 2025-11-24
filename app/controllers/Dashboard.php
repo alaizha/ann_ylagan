@@ -35,7 +35,7 @@ class Dashboard extends Controller {
 
         $this->call->view('layouts/header', $data);
         $this->call->view('layouts/sidebar', $data);
-        $this->call->view('dashboard/index', $data); // Confirm this file exists
+        $this->call->view('Dashboard/index', $data); // FIXED (capital 'D')
         $this->call->view('layouts/footer');
     }
 
