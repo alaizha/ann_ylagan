@@ -49,17 +49,7 @@ class Auth {
                          ->where('username', $username)
                          ->get();
 
-        // user must exist
-        if (!$user) {
-            return false;
-        }
-
-        // Prevent login if not verified
-        if (empty($user['verified_at'])) {
-            return false;
-        }
-
-        if (password_verify($password, $user['password'])) {
+        if ($user && password_verify($password, $user['password'])) {
             $this->_lava->session->set_userdata([
                 'id' => $user['id'],
                 'username' => $user['username'],
@@ -102,5 +92,4 @@ class Auth {
     {
         $this->_lava->session->unset_userdata(['id','username','role','logged_in']);
     }
-} 
-?>
+}

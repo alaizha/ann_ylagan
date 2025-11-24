@@ -1,0 +1,1 @@
+last_session_regenerate|i:1763639149;id|i:10;username|s:3:"ann";role|s:5:"admin";logged_in|b:1;user|a:3:{s:2:"id";i:10;s:8:"username";s:3:"ann";s:4:"role";s:5:"admin";}success_message|s:33:"Appointment updated successfully.";error_message|s:29:"Failed to update appointment.";

@@ -6,78 +6,67 @@ class Transactions extends Controller {
     public function __construct() {
         parent::__construct();
         $this->call->model('Transaction_model');
-        $this->call->model('Patient_model');
+        $this->call->model('Patient_model'); // para sa dropdown
     }
 
-    // Fetch transactions for frontend AJAX
-    public function fetch() {
-        $term = strtolower(trim($_GET['term'] ?? ''));
-        $transactions = $this->Transaction_model->get_all();
+    // Dashboard list
+    public function index() {
+        $data['transactions'] = $this->Transaction_model->get_all();
+        $this->call->view('blockchain/index', $data);
+    }
 
-        if ($term !== '') {
-            $firstChar = $term[0];
+    // Add Form Page
+    public function create() {
+        $data['patients'] = $this->Patient_model->get_all();
+        $this->call->view('blockchain/create', $data);
+    }
 
-            if (is_numeric($firstChar)) {
-                // Filter by TX No
-                $transactions = array_filter($transactions, function($tx) use ($term){
-                    return strpos(strtolower($tx['tx_no']), $term) === 0;
-                });
-            } else {
-                // Filter by first letter of first name
-                $transactions = array_filter($transactions, function($tx) use ($firstChar){
-                    $firstName = strtolower(explode(' ', $tx['patient_name'])[0]);
-                    return isset($firstName[0]) && $firstName[0] === $firstChar;
-                });
-            }
+    // Save new transaction
+    public function add() {
+
+        $last_tx = $this->Transaction_model->get_last_tx_no();
+
+        if ($last_tx) {
+            $num = (int) filter_var($last_tx, FILTER_SANITIZE_NUMBER_INT);
+            $tx_no = 'T' . str_pad($num + 1, 3, '0', STR_PAD_LEFT);
+        } else {
+            $tx_no = 'T001';
         }
 
-        header('Content-Type: application/json');
-        echo json_encode(array_values($transactions));
-        exit;
-    }
+        // ✅ Get patient_id, NOT patient_name
+        $patient_id = $this->io->post('patient');
 
-    // Add new transaction
-    public function add() {
-        $patient_id = $this->io->post('patient_id');
         $amount = $this->io->post('amount');
         $description = $this->io->post('description');
         $status = $this->io->post('status');
 
-        $tx_no = 'TX-' . uniqid();
-
         $data = [
-            'tx_no'        => $tx_no,
-            'patient_id'   => $patient_id,
-            'amount'       => $amount,
-            'description'  => $description,
-            'status'       => $status,
-            'created_at'   => date('Y-m-d H:i:s')
+            'tx_no' => $tx_no,
+            'patient_id' => $patient_id,
+
+            'amount' => $amount,
+            'description' => $description,
+            'status' => $status,
+            'created_at' => date('Y-m-d H:i:s')
         ];
 
-        $inserted = $this->Transaction_model->insert_transaction($data);
-
-        header('Content-Type: application/json');
-        echo json_encode(['success' => $inserted]);
-        exit;
+        if ($this->Transaction_model->insert_transaction($data)) {
+            redirect('transactions');
+        } else {
+            echo "❌ Failed to add transaction.";
+        }
     }
 
-    // PRINT RECEIPT
+    // 🧾 Print Receipt
     public function print_receipt($id)
     {
-        // Model is already loaded inside __construct()
-
         $transaction = $this->Transaction_model->get_transaction_by_id($id);
 
         if (!$transaction) {
-            show_404();
-            return;
+            die("Transaction not found.");
         }
 
-        // Load view (correct way in LavaLust)
-        $this->call->view('transactions/receipt', [
-            'transaction' => $transaction
-        ]);
+        // ✅ Join output already includes full name, use it
+        $this->call->view('transactions/receipt', ['transaction' => $transaction]);
     }
-
 }
-?>

@@ -9,166 +9,79 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
     <title>Create New User - HIV Treatment System</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * { 
-            margin: 0; 
-            padding: 0; 
-            box-sizing: border-box; 
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        body { background: #f5f7fa; color: #333; }
         
-        body { 
-            background: linear-gradient(135deg, #1a2332 0%, #0f1419 100%);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #e5e7eb;
-            min-height: 100vh;
-            padding: 20px;
-        }
+        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
         
-        .container { 
-            max-width: 900px; 
-            margin: 0 auto; 
-        }
-        
-        /* Header */
         .header { 
             display: flex; 
             justify-content: space-between; 
             align-items: center; 
             margin-bottom: 30px;
-            background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
-            padding: 25px 30px;
-            border-radius: 15px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-            border: 1px solid rgba(16, 185, 129, 0.2);
-            flex-wrap: wrap;
-            gap: 15px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
         
-        .header h1 {
-            background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-size: 1.8rem;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .header h1 i {
-            color: #10b981;
-            -webkit-text-fill-color: #10b981;
-        }
-        
-        /* Buttons */
         .btn { 
             padding: 10px 20px; 
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            background: #3498db; 
             color: white; 
             text-decoration: none; 
-            border-radius: 10px; 
+            border-radius: 5px; 
             border: none;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            font-weight: 600;
-            font-size: 14px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+            gap: 5px;
         }
         
-        .btn:hover {
-            background: linear-gradient(135deg, #059669 0%, #047857 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6);
-        }
+        .btn-success { background: #27ae60; }
+        .btn-danger { background: #e74c3c; }
+        .btn-warning { background: #f39c12; }
         
-        .btn-success { 
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-        }
-        
-        .btn-cancel {
-            background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
-            box-shadow: 0 4px 15px rgba(107, 114, 128, 0.4);
-        }
-
-        .btn-cancel:hover {
-            background: linear-gradient(135deg, #4b5563 0%, #374151 100%);
-            box-shadow: 0 6px 20px rgba(107, 114, 128, 0.6);
-        }
-        
-        /* Card */
         .card {
-            background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
-            border-radius: 15px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             overflow: hidden;
-            border: 1px solid rgba(16, 185, 129, 0.2);
         }
         
         .card-header {
-            padding: 20px 25px;
-            border-bottom: 1px solid rgba(16, 185, 129, 0.2);
-            background: rgba(16, 185, 129, 0.05);
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+            background: #f8f9fa;
         }
-
-        .card-header h3 {
-            color: #10b981;
-            font-weight: 600;
-            font-size: 1.2rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
+        
         .card-body {
             padding: 30px;
         }
         
-        /* Form Styles */
         .form-group {
             margin-bottom: 20px;
         }
         
         .form-label {
             display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: #d1d5db;
-            font-size: 14px;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #555;
         }
         
         .form-control {
             width: 100%;
-            padding: 12px 15px;
-            border: 2px solid rgba(16, 185, 129, 0.3);
-            border-radius: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
             font-size: 14px;
-            background: rgba(31, 41, 55, 0.6);
-            color: #e5e7eb;
-            transition: all 0.3s ease;
         }
         
         .form-control:focus {
             outline: none;
-            border-color: #10b981;
-            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
-            background: rgba(31, 41, 55, 0.8);
-        }
-
-        .form-control::placeholder {
-            color: #6b7280;
-        }
-
-        select.form-control option {
-            background: #1f2937;
-            color: #e5e7eb;
-        }
-
-        textarea.form-control {
-            resize: vertical;
-            min-height: 80px;
+            border-color: #3498db;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
         }
         
         .form-row {
@@ -182,94 +95,19 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
         
         .required::after {
             content: " *";
-            color: #f87171;
-            font-weight: bold;
+            color: #e74c3c;
         }
         
-        /* Alert */
         .alert {
-            padding: 15px 20px;
-            margin-bottom: 25px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: 500;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
         }
         
         .alert-danger {
-            background: rgba(239, 68, 68, 0.2);
-            color: #f87171;
-            border: 1px solid rgba(239, 68, 68, 0.4);
-        }
-
-        /* Checkbox Styling */
-        input[type="checkbox"] {
-            width: 20px;
-            height: 20px;
-            cursor: pointer;
-            accent-color: #10b981;
-        }
-
-        /* Form Actions */
-        .form-actions {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(16, 185, 129, 0.2);
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            body {
-                padding: 15px;
-            }
-
-            .header {
-                padding: 20px;
-            }
-
-            .header h1 {
-                font-size: 1.5rem;
-            }
-
-            .form-row {
-                flex-direction: column;
-            }
-
-            .card-body {
-                padding: 20px;
-            }
-
-            .form-actions {
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            .btn {
-                width: 100%;
-                justify-content: center;
-            }
-        }
-
-        /* Scrollbar */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: rgba(31, 41, 55, 0.5);
-            border-radius: 10px;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #10b981;
-            border-radius: 10px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #059669;
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
         }
     </style>
 </head>
@@ -286,7 +124,7 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
         <div class="header">
             <h1><i class="fas fa-user-plus"></i> Create New User</h1>
             <div>
-                <a href="<?php echo site_url('users'); ?>" class="btn">
+                <a href="<?php echo site_url('users'); ?>" class="btn" style="background: #95a5a6;">
                     <i class="fas fa-arrow-left"></i> Back to Users
                 </a>
             </div>
@@ -303,13 +141,13 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
                         <div class="form-col">
                             <div class="form-group">
                                 <label class="form-label required" for="first_name">First Name</label>
-                                <input type="text" class="form-control" id="first_name" name="first_name" placeholder="Enter first name" required>
+                                <input type="text" class="form-control" id="first_name" name="first_name" required>
                             </div>
                         </div>
                         <div class="form-col">
                             <div class="form-group">
                                 <label class="form-label required" for="last_name">Last Name</label>
-                                <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Enter last name" required>
+                                <input type="text" class="form-control" id="last_name" name="last_name" required>
                             </div>
                         </div>
                     </div>
@@ -318,13 +156,13 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
                         <div class="form-col">
                             <div class="form-group">
                                 <label class="form-label required" for="username">Username</label>
-                                <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" required>
+                                <input type="text" class="form-control" id="username" name="username" required>
                             </div>
                         </div>
                         <div class="form-col">
                             <div class="form-group">
                                 <label class="form-label required" for="email">Email Address</label>
-                                <input type="email" class="form-control" id="email" name="email" placeholder="example@gmail.com" required>
+                                <input type="email" class="form-control" id="email" name="email" required>
                             </div>
                         </div>
                     </div>
@@ -333,13 +171,13 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
                         <div class="form-col">
                             <div class="form-group">
                                 <label class="form-label required" for="password">Password</label>
-                                <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" required>
+                                <input type="password" class="form-control" id="password" name="password" required>
                             </div>
                         </div>
                         <div class="form-col">
                             <div class="form-group">
                                 <label class="form-label required" for="password_confirmation">Confirm Password</label>
-                                <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Confirm password" required>
+                                <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
                             </div>
                         </div>
                     </div>
@@ -360,7 +198,7 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
                         <div class="form-col">
                             <div class="form-group">
                                 <label class="form-label" for="phone">Phone Number</label>
-                                <input type="tel" class="form-control" id="phone" name="phone" placeholder="09XXXXXXXXX">
+                                <input type="tel" class="form-control" id="phone" name="phone">
                             </div>
                         </div>
                     </div>
@@ -387,39 +225,39 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 
                     <div class="form-group">
                         <label class="form-label" for="address">Address</label>
-                        <textarea class="form-control" id="address" name="address" rows="3" placeholder="Enter complete address"></textarea>
+                        <textarea class="form-control" id="address" name="address" rows="3"></textarea>
                     </div>
 
                     <div class="form-row">
                         <div class="form-col">
                             <div class="form-group">
                                 <label class="form-label" for="city">City</label>
-                                <input type="text" class="form-control" id="city" name="city" placeholder="City">
+                                <input type="text" class="form-control" id="city" name="city">
                             </div>
                         </div>
                         <div class="form-col">
                             <div class="form-group">
                                 <label class="form-label" for="province">Province</label>
-                                <input type="text" class="form-control" id="province" name="province" placeholder="Province">
+                                <input type="text" class="form-control" id="province" name="province">
                             </div>
                         </div>
                         <div class="form-col">
                             <div class="form-group">
                                 <label class="form-label" for="zip_code">Zip Code</label>
-                                <input type="text" class="form-control" id="zip_code" name="zip_code" placeholder="Zip Code">
+                                <input type="text" class="form-control" id="zip_code" name="zip_code">
                             </div>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div style="display: flex; align-items: center; gap: 10px;">
-                            <input type="checkbox" id="is_active" name="is_active" value="1" checked>
-                            <label class="form-label" for="is_active" style="margin: 0; cursor: pointer;">Active User</label>
+                            <input type="checkbox" id="is_active" name="is_active" value="1" checked style="width: auto;">
+                            <label class="form-label" for="is_active" style="margin: 0;">Active User</label>
                         </div>
                     </div>
 
-                    <div class="form-actions">
-                        <a href="<?php echo site_url('users'); ?>" class="btn btn-cancel">
+                    <div style="display: flex; justify-content: space-between; margin-top: 30px;">
+                        <a href="<?php echo site_url('users'); ?>" class="btn" style="background: #95a5a6;">
                             <i class="fas fa-times"></i> Cancel
                         </a>
                         <button type="submit" class="btn btn-success">

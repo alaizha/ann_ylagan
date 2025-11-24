@@ -36,54 +36,31 @@ class IotDevices extends Controller
     public function index()
     {
         $search = isset($_GET['search']) ? trim($_GET['search']) : '';
+
         $devices = $this->iotDeviceModel->get_all_devices($search);
         $connectedCount = $this->iotDeviceModel->count_connected_devices();
-        
-        // Get patients for dropdown
-        $patients = $this->iotDeviceModel->get_all_patients();
 
         $this->call->view('iot_devices/index', [
             'devices' => $devices,
             'connectedCount' => $connectedCount,
-            'search' => $search,
-            'patients' => $patients
+            'search' => $search
         ]);
     }
 
-    public function get_all_devices($search = '') {
-        $builder = $this->db->table($this->table);
-
-        if (!empty($search)) {
-            $search = $search . '%'; // starts with
-            $builder->like('patient', $search)
-                    ->or_like('device_id', $search)
-                    ->or_like('type', $search);
-        }
-
-        return $builder->get_all(); // Make sure you return this
-    }
-
-
     public function store()
-{
-    $this->require_admin();
+    {
+        $this->require_admin();
 
-    // Set timezone to Philippines
-    date_default_timezone_set('Asia/Manila');
+        $data = [
+            'device_id' => $this->io->post('device_id'),
+            'type'      => $this->io->post('type'),
+            'patient'   => $this->io->post('patient'),
+            'status'    => 'Connected',
+        ];
 
-    $data = [
-        'device_id'  => $this->io->post('device_id'),
-        'type'       => $this->io->post('type'),
-        'patient'    => $this->io->post('patient'),
-        'status'     => 'Connected',
-        'registered_at' => date('Y-m-d H:i:s') // 24-hour format para sa database
-
-    ];
-
-    $this->iotDeviceModel->add_device($data);
-    redirect('/iot-devices');
-}
-
+        $this->iotDeviceModel->add_device($data);
+        redirect('/iot-devices');
+    }
 
     public function delete($device_id)
     {

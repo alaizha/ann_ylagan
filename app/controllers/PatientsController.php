@@ -20,46 +20,22 @@ class PatientsController extends Controller {
     }
 
     /* ==========================================
-       📄 VIEW ALL PATIENTS (SAME STRUCTURE AS USERSCONTROLLER)
+       📄 VIEW ALL PATIENTS (Fix: safe search input)
     =========================================== */
     public function index() {
+    // ✅ TAMA - Gamitin ang Lavalust IO
     $search = $this->io->get('search') ?? '';
-    $page = $this->io->get('page') ? (int)$this->io->get('page') : 1;
-    $records_per_page = 10;
-
-    // Get paginated patients
-    $patients_data = $this->Patient_model->page($search, $records_per_page, $page);
-    $data['patients'] = $patients_data['records'];
-    $total_rows = $patients_data['total_rows'];
-
-    // Pagination settings
-    $this->pagination->set_options([
-        'first_link' => '⏮ First',
-        'last_link'  => 'Last ⏭',
-        'next_link'  => 'Next →',
-        'prev_link'  => '← Prev',
-        'page_delimiter' => '&page='
-    ]);
-
-    $this->pagination->set_theme('custom');
-    $this->pagination->initialize($total_rows, $records_per_page, $page, 'patients?search='.$search);
-    $data['page'] = $this->pagination->paginate();
-
+    
     $data['search'] = $search;
-    $data['total_patients'] = $total_rows;
-    $data['current_page'] = $page;
-    $data['total_pages'] = ceil($total_rows / $records_per_page);
-
-    // ✅ REQUIRED FOR GLOBAL SEARCH (ALL PAGES)
-    $data['all_patients'] = $this->Patient_model->get_all_patients();
-
-    // Render
+    $data['patients'] = $this->Patient_model->get_all_patients($search);
     $this->call->view('patients/index', $data);
 }
 
-
-    // ... REST OF YOUR METHODS REMAIN THE SAME ...
+    /* ==========================================
+       ➕ ADD NEW PATIENT (POST)
+    =========================================== */
     public function add() {
+
         $input = [
             'first_name'     => trim($this->io->post('first_name')),
             'last_name'      => trim($this->io->post('last_name')),
@@ -75,16 +51,25 @@ class PatientsController extends Controller {
         redirect('patients');
     }
 
+    /* ==========================================
+       ✏️ EDIT PAGE
+    =========================================== */
     public function edit($id) {
         $data['patient'] = $this->Patient_model->get_patient_by_id($id);
+
         if (!$data['patient']) {
             echo "Patient not found!";
             return;
         }
+
         $this->call->view('patients/edit', $data);
     }
 
+    /* ==========================================
+       🔄 UPDATE PATIENT (POST)
+    =========================================== */
     public function update($id) {
+
         $input = [
             'first_name'     => trim($this->io->post('first_name')),
             'last_name'      => trim($this->io->post('last_name')),
@@ -95,18 +80,27 @@ class PatientsController extends Controller {
             'email'          => trim($this->io->post('email')),
             'status'         => $this->io->post('status')
         ];
+
         $this->Patient_model->update_patient($id, $input);
+
         redirect('patients');
     }
 
+    /* ==========================================
+       🗑 DELETE PATIENT
+    =========================================== */
     public function delete($id) {
         $this->Patient_model->delete_patient($id);
         redirect('patients');
     }
-    
 
+    /* ==========================================
+       📤 EXPORT CSV (AUTO-INCLUDES AGE)
+    =========================================== */
     public function exportCSV() {
+
         $patients = $this->Patient_model->get_all_patients();
+
         $filename = 'patients_' . date('Y-m-d') . '.csv';
 
         header("Content-Description: File Transfer");
@@ -114,16 +108,32 @@ class PatientsController extends Controller {
         header("Content-Type: text/csv; charset=utf-8");
 
         $output = fopen("php://output", "w");
-        fputcsv($output, ['ID', 'Full Name', 'Birth Date', 'Age', 'Gender', 'Contact', 'Address', 'Email', 'Status']);
 
+        // CSV HEADER
+        fputcsv($output, [
+            'ID', 'Full Name', 'Birth Date', 'Age',
+            'Gender', 'Contact', 'Address', 'Email', 'Status'
+        ]);
+
+        // DATA ROWS
         foreach ($patients as $row) {
+
+            // Ensure age exists in row
             $age = $row['age'] ?? '';
+
             fputcsv($output, [
-                $row['id'], $row['first_name'] . ' ' . $row['last_name'],
-                $row['birth_date'], $age, $row['gender'], $row['contact_number'],
-                $row['address'], $row['email'], $row['status']
+                $row['id'],
+                $row['first_name'] . ' ' . $row['last_name'],
+                $row['birth_date'],
+                $age,
+                $row['gender'],
+                $row['contact_number'],
+                $row['address'],
+                $row['email'],
+                $row['status']
             ]);
         }
+
         fclose($output);
         exit;
     }

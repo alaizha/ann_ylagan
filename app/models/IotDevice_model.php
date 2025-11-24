@@ -6,25 +6,21 @@ class IotDevice_model extends Model
     protected $table = 'iot_devices';
 
     // ✅ Search filter
-    // ✅ Search filter (starts with)
-public function search_devices($keyword)
-{
-    $keyword = $keyword . '%'; // append % to match "starts with"
+    public function search_devices($keyword)
+    {
+        return $this->db->table($this->table)
+                        ->like('device_id', $keyword)
+                        ->or_like('type', $keyword)
+                        ->or_like('patient', $keyword)
+                        ->get_all();
+    }
 
-    return $this->db->table($this->table)
-                    ->like('device_id', $keyword)
-                    ->or_like('type', $keyword)
-                    ->or_like('patient', $keyword)
-                    ->get_all();
-}
-
-// ✅ Get all devices (with search support, starts with)
-public function get_all_devices($search = '')
+    // ✅ Get all devices (with search support)
+    public function get_all_devices($search = '')
 {
     $builder = $this->db->table($this->table);
 
     if (!empty($search)) {
-        $search = $search . '%'; // append % for starts-with
         $builder->like('patient', $search);
         $builder->or_like('device_id', $search);
         $builder->or_like('type', $search);
@@ -32,7 +28,6 @@ public function get_all_devices($search = '')
 
     return $builder->get_all();
 }
-
 
 
     // ✅ Count connected devices
@@ -46,18 +41,15 @@ public function get_all_devices($search = '')
 
     // ✅ Add new device
     public function add_device($data)
-{
-    $insertData = [
-        'device_id'  => $data['device_id'],
-        'type'       => $data['type'],
-        'patient'    => $data['patient'],
-        'status'     => isset($data['status']) ? $data['status'] : 'Connected',
-        'registered_at' => isset($data['registered_at']) ? $data['registered_at'] : date('Y-m-d H:i:s')
-    ];
-
-    return $this->db->table($this->table)->insert($insertData);
-}
-
+    {
+        $insertData = [
+            'device_id' => $data['device_id'],
+            'type'      => $data['type'],
+            'patient'   => $data['patient'],
+            'status'    => isset($data['status']) ? $data['status'] : 'Connected',
+        ];
+        return $this->db->table($this->table)->insert($insertData);
+    }
 
     // ✅ Delete device
     public function delete_device($device_id)
@@ -74,12 +66,4 @@ public function get_all_devices($search = '')
                         ->where('device_id', $device_id)
                         ->get();
     }
-    // Get all patients
-    public function get_all_patients()
-    {
-        return $this->db->table('patients')
-                        ->select('id, first_name, last_name')
-                        ->get_all();
-    }
-
 }

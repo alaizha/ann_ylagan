@@ -9,7 +9,7 @@ class UsersModel extends Model {
     public function __construct() {
         parent::__construct();
     }
-    
+
     /* ============================
        🔍 GET USER RECORDS
     ============================= */
@@ -34,11 +34,6 @@ class UsersModel extends Model {
 
     public function get_all_users() {
         return $this->db->table($this->table)->get_all();
-    }
-
-    public function has_admin() {
-        $admin = $this->db->table('user')->where('role', 'admin')->get();
-        return !empty($admin);
     }
 
     public function get_logged_in_user() {
@@ -109,29 +104,33 @@ class UsersModel extends Model {
        🔁 CHECK EMAIL / USERNAME (FIXED)
     ============================= */
 
-    public function email_exists($email, $exclude_id = null) 
-    {
-        $query = $this->db->table($this->table)->where('email', $email);
-        
-        if ($exclude_id !== null) {
-            $query->where('id !=', $exclude_id);
-        }
-        
-        $result = $query->get();
-        return !empty($result);
-    }
+    /* ============================
+   🔁 CHECK EMAIL / USERNAME (FIXED)
+============================= */
 
-    public function username_exists($username, $exclude_id = null) 
-    {
-        $query = $this->db->table($this->table)->where('username', $username);
-        
-        if ($exclude_id !== null) {
-            $query->where('id !=', $exclude_id);
-        }
-        
-        $result = $query->get();
-        return !empty($result);
+public function email_exists($email, $exclude_id = null) 
+{
+    $query = $this->db->table($this->table)->where('email', $email);
+    
+    if ($exclude_id !== null) {
+        $query->where('id !=', $exclude_id); // FIXED: Remove extra space
     }
+    
+    $result = $query->get();
+    return !empty($result);
+}
+
+public function username_exists($username, $exclude_id = null) 
+{
+    $query = $this->db->table($this->table)->where('username', $username);
+    
+    if ($exclude_id !== null) {
+        $query->where('id !=', $exclude_id); // FIXED: Remove extra space
+    }
+    
+    $result = $query->get();
+    return !empty($result);
+}
 
     /* ============================
        📊 EXTRA UTILITIES
@@ -159,23 +158,5 @@ class UsersModel extends Model {
                         ->order_by('created_at', 'DESC')
                         ->limit($limit)
                         ->get_all();
-    }
-
-    /* ============================
-       🔐 CHECK PASSWORD EXISTS
-       (FIXED FOR LAVALUST)
-    ============================= */
-
-    public function password_exists($password) {
-        // LavaLust doesn't support from(), so use query()
-        $allUsers = $this->db->query("SELECT password FROM user")->fetchAll();
-
-        foreach ($allUsers as $user) {
-            if (password_verify($password, $user['password'])) {
-                return true;
-            }
-        }
-
-        return false;
     }
 }

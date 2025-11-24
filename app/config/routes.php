@@ -54,9 +54,6 @@ $router->match('/auth/register', 'UsersController::register', ['GET','POST']);
 $router->match('/auth/login', 'UsersController::login', ['GET','POST']);
 $router->get('/auth/logout', 'UsersController::logout');
 
-// NEW: email verification route (no token, sets verified_at)
-$router->get('/auth/verify/{id}', 'UsersController::verify');
-
 // Homepage (after login)
 $router->get('/users', 'UsersController::index');
 $router->get('/users/dashboard', 'UsersController::dashboard');
@@ -65,7 +62,7 @@ $router->get('/users/dashboard', 'UsersController::dashboard');
 // DASHBOARD ROUTES
 // ========================
 $router->get('/dashboard', 'Dashboard::index');
-$router->get('/dashboard/patients', 'PatientsController::index');
+$router->get('/dashboard/patients', 'Dashboard::patients');
 $router->get('/dashboard/iot-devices', 'Dashboard::iot_devices');
 $router->get('/dashboard/blockchain', 'Dashboard::blockchain');
 $router->get('/dashboard/system-activities', 'Dashboard::system_activities');

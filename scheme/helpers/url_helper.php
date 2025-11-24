@@ -77,31 +77,25 @@ if ( ! function_exists('site_url'))
 
 if ( ! function_exists('redirect'))
 {
-    /**
-     * Handle redirection function using header()
-     *
-     * @param string $uri
-     * @param boolean $permanent
-     * @param boolean $exit
-     * @return void
-     */
-    function redirect($uri = '', $permanent = false, $exit = true)
-    {
-        if ( ! preg_match('#^(\w+:)?//#i', $uri))
-        {
-            $uri = site_url($uri);
-        }
-
-        if (!headers_sent())
-        {
-            header('Location: ' . $uri, true, ($permanent === true) ? 301 : 302);
-        }
-
-        if ($exit === true)
-        {
-            exit;
-        }
-    }
+	/**
+	 * Handle redirection function using header()
+	 *
+	 * @param string $uri
+	 * @param boolean $permanent
+	 * @return string
+	 */
+	function redirect($uri = '', $permanent = false, $exit = true)
+	{
+		if ( ! preg_match('#^(\w+:)?//#i', $uri))
+		{
+			$uri = site_url($uri);
+		}
+		if (headers_sent() === false)
+		{
+			header('Location: ' . $uri, true, ($permanent === true) ? 301 : 302);
+		}
+		($exit === true) ?? exit();
+	}
 }
 
 if ( ! function_exists('load_js'))

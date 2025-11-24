@@ -16,8 +16,8 @@
         }
 
         body {
-            background: linear-gradient(135deg, #1a2332 0%, #0f1419 100%);
-            color: #e5e7eb;
+            background-color: #f5f7fa;
+            color: #333;
             line-height: 1.6;
         }
 
@@ -41,28 +41,18 @@
             display: flex;
             flex-direction: column;
             padding: 20px 0;
-            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
-            border-right: 1px solid rgba(16, 185, 129, 0.2);
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
         }
 
         .sidebar-header {
             padding: 0 20px 20px;
-            border-bottom: 1px solid rgba(16, 185, 129, 0.3);
+            border-bottom: 1px solid #374151;
             margin-bottom: 20px;
         }
 
         .sidebar-header h3 {
             font-size: 1.3rem;
             font-weight: 600;
-            background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .sidebar-header h3 i {
-            color: #10b981;
-            -webkit-text-fill-color: #10b981;
         }
 
         .sidebar a {
@@ -81,21 +71,15 @@
         }
 
         .sidebar a:hover, .sidebar a.active {
-            background: rgba(16, 185, 129, 0.1);
-            color: #10b981;
-            border-left: 4px solid #10b981;
+            background-color: #374151;
+            color: #fff;
+            border-left: 4px solid #3b82f6;
         }
 
         .sidebar .logout {
             margin-top: auto;
-            border-top: 1px solid rgba(16, 185, 129, 0.3);
+            border-top: 1px solid #374151;
             padding-top: 15px;
-        }
-
-        .sidebar .logout:hover {
-            background: rgba(239, 68, 68, 0.1);
-            color: #f87171;
-            border-left-color: #ef4444;
         }
 
         /* ======= MAIN CONTENT ======= */
@@ -107,24 +91,16 @@
 
         .page-header {
             margin-bottom: 25px;
-            background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
-            border: 1px solid rgba(16, 185, 129, 0.2);
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
 
         .page-header h1 {
-            background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: #1f2937;
             font-size: 1.8rem;
             font-weight: 600;
         }
 
         .page-header p {
-            color: #9ca3af;
+            color: #6b7280;
             margin-top: 5px;
         }
 
@@ -137,28 +113,27 @@
         }
 
         .stat-card {
-            background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
-            border: 1px solid rgba(16, 185, 129, 0.2);
+            background-color: #fff;
             border-radius: 12px;
             padding: 22px;
             display: flex;
             align-items: center;
             gap: 18px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
             transition: transform 0.3s, box-shadow 0.3s;
             border-left: 4px solid transparent;
         }
 
         .stat-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.2);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
         }
 
         .stat-card.patients { border-left-color: #10b981; }
         .stat-card.devices { border-left-color: #3b82f6; }
         .stat-card.transactions { border-left-color: #8b5cf6; }
         .stat-card.appointments { border-left-color: #f59e0b; }
-        .stat-card.profile { border-left-color: #10b981; }
+        .stat-card.profile { border-left-color: #8b5cf6; }
 
         .stat-icon {
             width: 55px;
@@ -171,23 +146,23 @@
             font-size: 1.4rem;
         }
 
-        .stat-icon.patients { background: linear-gradient(135deg, #10b981 0%, #059669 100%); }
-        .stat-icon.devices { background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); }
-        .stat-icon.transactions { background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); }
-        .stat-icon.appointments { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
-        .stat-icon.profile { background: linear-gradient(135deg, #10b981 0%, #059669 100%); }
+        .stat-icon.patients { background-color: #10b981; }
+        .stat-icon.devices { background-color: #3b82f6; }
+        .stat-icon.transactions { background-color: #8b5cf6; }
+        .stat-icon.appointments { background-color: #f59e0b; }
+        .stat-icon.profile { background-color: #8b5cf6; }
 
         .stat-info h2 {
             margin: 0;
             font-size: 1.9rem;
             font-weight: 700;
-            color: #e5e7eb;
+            color: #1f2937;
         }
 
         .stat-info p {
             margin: 5px 0 0;
             font-size: 0.9rem;
-            color: #9ca3af;
+            color: #6b7280;
         }
 
         .trend {
@@ -201,12 +176,11 @@
 
         /* ======= MONITORING SECTION ======= */
         .monitoring-section {
-            background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
-            border: 1px solid rgba(16, 185, 129, 0.2);
+            background-color: #fff;
             border-radius: 12px;
             padding: 25px;
             margin-bottom: 30px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
         }
 
         .section-header {
@@ -217,7 +191,7 @@
         }
 
         .section-header h3 {
-            color: #e5e7eb;
+            color: #1f2937;
             font-size: 1.3rem;
             font-weight: 600;
         }
@@ -238,7 +212,6 @@
             border-radius: 50%;
             display: inline-block;
             animation: pulse 1.5s infinite;
-            box-shadow: 0 0 10px #10b981;
         }
 
         @keyframes pulse {
@@ -252,7 +225,7 @@
             align-items: center;
             justify-content: space-between;
             padding: 15px 0;
-            border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+            border-bottom: 1px solid #f3f4f6;
         }
 
         .patient-monitor:last-child {
@@ -262,13 +235,13 @@
         .patient-info h4 {
             margin: 0;
             font-size: 1.05rem;
-            color: #e5e7eb;
+            color: #1f2937;
         }
 
         .patient-info p {
             margin: 3px 0 0;
             font-size: 0.85rem;
-            color: #9ca3af;
+            color: #6b7280;
         }
 
         .status-badge {
@@ -279,31 +252,19 @@
             font-weight: 600;
         }
 
-        .status-badge.stable { 
-            background: rgba(16, 185, 129, 0.2);
-            color: #34d399;
-            border: 1px solid rgba(16, 185, 129, 0.4);
-        }
-        .status-badge.warning { 
-            background: rgba(251, 191, 36, 0.2);
-            color: #fbbf24;
-            border: 1px solid rgba(251, 191, 36, 0.4);
-        }
-        .status-badge.critical { 
-            background: rgba(239, 68, 68, 0.2);
-            color: #f87171;
-            border: 1px solid rgba(239, 68, 68, 0.4);
-        }
+        .status-badge.stable { background-color: #10b981; }
+        .status-badge.warning { background-color: #f59e0b; }
+        .status-badge.critical { background-color: #ef4444; }
 
         .view-details {
             font-size: 0.85rem;
-            color: #10b981;
+            color: #3b82f6;
             font-weight: 500;
             transition: color 0.2s;
         }
 
         .view-details:hover {
-            color: #34d399;
+            color: #1d4ed8;
             text-decoration: underline;
         }
 
@@ -311,12 +272,8 @@
             display: inline-block;
             margin-top: 15px;
             font-size: 0.9rem;
-            color: #10b981;
+            color: #3b82f6;
             font-weight: 500;
-        }
-
-        .view-all:hover {
-            color: #34d399;
         }
 
         /* ======= BOTTOM GRID ======= */
@@ -329,11 +286,10 @@
 
         /* ======= BLOCKCHAIN PANEL ======= */
         .blockchain-panel {
-            background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
-            border: 1px solid rgba(16, 185, 129, 0.2);
+            background-color: #fff;
             border-radius: 12px;
             padding: 25px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
         }
 
         .blockchain-panel h3 {
@@ -341,7 +297,7 @@
             margin-bottom: 20px;
             font-size: 1.3rem;
             font-weight: 600;
-            color: #e5e7eb;
+            color: #1f2937;
         }
 
         .transaction-item {
@@ -349,7 +305,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 12px 0;
-            border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+            border-bottom: 1px solid #f3f4f6;
         }
 
         .transaction-item:last-child {
@@ -362,17 +318,17 @@
 
         .tx-id {
             font-weight: 600;
-            color: #10b981;
+            color: #1f2937;
         }
 
         .patient-name {
-            color: #9ca3af;
+            color: #6b7280;
             font-size: 0.9rem;
             margin-top: 3px !important;
         }
 
         .transaction-info small {
-            color: #6b7280;
+            color: #9ca3af;
             font-size: 0.8rem;
         }
 
@@ -390,35 +346,22 @@
             margin-bottom: 5px;
         }
 
-        .badge.completed { 
-            background: rgba(16, 185, 129, 0.2);
-            color: #34d399;
-            border: 1px solid rgba(16, 185, 129, 0.4);
-        }
-        .badge.pending { 
-            background: rgba(251, 191, 36, 0.2);
-            color: #fbbf24;
-            border: 1px solid rgba(251, 191, 36, 0.4);
-        }
-        .badge.failed { 
-            background: rgba(239, 68, 68, 0.2);
-            color: #f87171;
-            border: 1px solid rgba(239, 68, 68, 0.4);
-        }
+        .badge.completed { background-color: #10b981; }
+        .badge.pending { background-color: #f59e0b; }
+        .badge.failed { background-color: #ef4444; }
 
         .amount {
             font-weight: 700;
-            color: #10b981;
+            color: #1f2937;
             margin: 0;
         }
 
         /* ======= APPOINTMENTS SECTION ======= */
         .appointments-section {
-            background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
-            border: 1px solid rgba(16, 185, 129, 0.2);
+            background-color: #fff;
             border-radius: 12px;
             padding: 25px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
         }
 
         .appointments-table {
@@ -428,23 +371,22 @@
         }
 
         .appointments-table th {
-            background: rgba(16, 185, 129, 0.1);
-            color: #10b981;
+            background: #f8fafc;
+            color: #374151;
             padding: 14px 12px;
             text-align: left;
             font-weight: 600;
             font-size: 0.9rem;
-            border-bottom: 2px solid rgba(16, 185, 129, 0.3);
+            border-bottom: 2px solid #e5e7eb;
         }
 
         .appointments-table td {
             padding: 14px 12px;
-            border-bottom: 1px solid rgba(16, 185, 129, 0.1);
-            color: #d1d5db;
+            border-bottom: 1px solid #f3f4f6;
         }
 
         .appointments-table tr:hover {
-            background: rgba(16, 185, 129, 0.05);
+            background-color: #f8fafc;
         }
 
         /* ======= BUTTONS ======= */
@@ -466,61 +408,30 @@
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            background-color: #3b82f6;
             color: white;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
         }
 
         .btn-primary:hover {
-            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+            background-color: #2563eb;
         }
 
         .btn-warning {
-            background: rgba(251, 191, 36, 0.2);
-            color: #fbbf24;
-            border: 1px solid rgba(251, 191, 36, 0.3);
+            background-color: #f59e0b;
+            color: white;
         }
 
         .btn-warning:hover {
-            background: rgba(251, 191, 36, 0.3);
-            transform: translateY(-2px);
+            background-color: #d97706;
         }
 
         .btn-danger {
-            background: rgba(239, 68, 68, 0.2);
-            color: #f87171;
-            border: 1px solid rgba(239, 68, 68, 0.3);
+            background-color: #ef4444;
+            color: white;
         }
 
         .btn-danger:hover {
-            background: rgba(239, 68, 68, 0.3);
-            transform: translateY(-2px);
-        }
-
-        .btn-success {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            color: white;
-            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
-        }
-
-        .btn-success:hover {
-            background: linear-gradient(135deg, #059669 0%, #047857 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
-        }
-
-        .btn-info {
-            background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
-            color: white;
-            box-shadow: 0 4px 15px rgba(6, 182, 212, 0.3);
-        }
-
-        .btn-info:hover {
-            background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(6, 182, 212, 0.4);
+            background-color: #dc2626;
         }
 
         .btn-sm {
@@ -530,13 +441,12 @@
 
         /* ======= USER DASHBOARD STYLES ======= */
         .user-welcome {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border-radius: 12px;
             padding: 30px;
             margin-bottom: 30px;
             text-align: center;
-            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
         }
 
         .user-stats {
@@ -553,67 +463,30 @@
         }
 
         .feature-card {
-            background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
-            border: 1px solid rgba(16, 185, 129, 0.2);
+            background: white;
             border-radius: 12px;
             padding: 25px;
             text-align: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
             transition: transform 0.3s;
         }
 
         .feature-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.2);
         }
 
         .feature-icon {
             font-size: 2.5rem;
-            color: #10b981;
+            color: #3b82f6;
             margin-bottom: 15px;
-        }
-
-        .feature-card h3 {
-            color: #e5e7eb;
-        }
-
-        .feature-card p {
-            color: #9ca3af;
-        }
-
-        /* ======= ANALYTICS SECTION ======= */
-        .analytics-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .analytics-item {
-            background: rgba(16, 185, 129, 0.05);
-            border: 1px solid rgba(16, 185, 129, 0.2);
-            padding: 15px;
-            border-radius: 8px;
-            text-align: center;
-        }
-
-        .analytics-item > div:first-child {
-            font-size: 1.8rem;
-            font-weight: bold;
-        }
-
-        .analytics-item > div:last-child {
-            font-size: 0.85rem;
-            color: #9ca3af;
         }
 
         /* ======= UTILITY CLASSES ======= */
         .text-center { text-align: center; }
-        .text-muted { color: #9ca3af; }
+        .text-muted { color: #6b7280; }
         .py-4 { padding-top: 1.5rem; padding-bottom: 1.5rem; }
         .mb-2 { margin-bottom: 0.5rem; }
         .mt-3 { margin-top: 1rem; }
-        .mt-4 { margin-top: 1.5rem; }
 
         /* ======= RESPONSIVE DESIGN ======= */
         @media screen and (max-width: 1024px) {
@@ -658,6 +531,7 @@
                 <a href="<?= site_url('iot-devices') ?>"><i class="fas fa-microchip"></i> IoT Devices</a>
                 <a href="<?= site_url('blockchain') ?>"><i class="fas fa-link"></i> Blockchain Billing</a>
                 <a href="<?= site_url('users') ?>"><i class="fas fa-users-cog"></i> User Management</a>
+                <a href="<?= site_url('medical-records') ?>"><i class="fas fa-file-medical"></i> Medical Records</a>
             <?php else: ?>
                 <!-- USER ONLY LINKS -->
                 <a href="<?= site_url('profile') ?>"><i class="fas fa-user"></i> My Profile</a>
@@ -720,44 +594,44 @@
                     </div>
 
                     <!-- Analytics Metrics -->
-                    <div class="analytics-grid">
-                        <div class="analytics-item">
-                            <div style="color: #10b981;"><?= $analytics_data['viral_load_suppression'] ?? '87%' ?></div>
-                            <div>Viral Load Suppression</div>
+                    <div class="analytics-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 20px;">
+                        <div class="analytics-item" style="background: #f8f9fa; padding: 15px; border-radius: 8px; text-align: center;">
+                            <div style="font-size: 1.8rem; font-weight: bold; color: #10b981;"><?= $analytics_data['viral_load_suppression'] ?? '87%' ?></div>
+                            <div style="font-size: 0.85rem; color: #6b7280;">Viral Load Suppression</div>
                         </div>
-                        <div class="analytics-item">
-                            <div style="color: #3b82f6;"><?= $analytics_data['art_adherence_rate'] ?? '92%' ?></div>
-                            <div>ART Adherence Rate</div>
+                        <div class="analytics-item" style="background: #f8f9fa; padding: 15px; border-radius: 8px; text-align: center;">
+                            <div style="font-size: 1.8rem; font-weight: bold; color: #3b82f6;"><?= $analytics_data['art_adherence_rate'] ?? '92%' ?></div>
+                            <div style="font-size: 0.85rem; color: #6b7280;">ART Adherence Rate</div>
                         </div>
-                        <div class="analytics-item">
-                            <div style="color: #8b5cf6;"><?= $analytics_data['new_patients_month'] ?? 15 ?></div>
-                            <div>New Patients This Month</div>
+                        <div class="analytics-item" style="background: #f8f9fa; padding: 15px; border-radius: 8px; text-align: center;">
+                            <div style="font-size: 1.8rem; font-weight: bold; color: #8b5cf6;"><?= $analytics_data['new_patients_month'] ?? 15 ?></div>
+                            <div style="font-size: 0.85rem; color: #6b7280;">New Patients This Month</div>
                         </div>
-                        <div class="analytics-item">
-                            <div style="color: #f59e0b;"><?= $analytics_data['avg_appointments_day'] ?? 8 ?></div>
-                            <div>Avg Appointments/Day</div>
+                        <div class="analytics-item" style="background: #f8f9fa; padding: 15px; border-radius: 8px; text-align: center;">
+                            <div style="font-size: 1.8rem; font-weight: bold; color: #f59e0b;"><?= $analytics_data['avg_appointments_day'] ?? 8 ?></div>
+                            <div style="font-size: 0.85rem; color: #6b7280;">Avg Appointments/Day</div>
                         </div>
                     </div>
 
                     <!-- Additional Analytics Data -->
-                    <div style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); padding: 20px; border-radius: 8px; margin-top: 15px;">
-                        <h4 style="margin-bottom: 15px; color: #e5e7eb;">Monthly Performance</h4>
+                    <div style="background: #f8fafc; padding: 20px; border-radius: 8px; margin-top: 15px;">
+                        <h4 style="margin-bottom: 15px; color: #1f2937;">Monthly Performance</h4>
                         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;">
                             <div style="text-align: center;">
                                 <div style="font-size: 1.5rem; font-weight: bold; color: #10b981;">98%</div>
-                                <div style="font-size: 0.8rem; color: #9ca3af;">System Uptime</div>
+                                <div style="font-size: 0.8rem; color: #6b7280;">System Uptime</div>
                             </div>
                             <div style="text-align: center;">
                                 <div style="font-size: 1.5rem; font-weight: bold; color: #3b82f6;">24h</div>
-                                <div style="font-size: 0.8rem; color: #9ca3af;">Avg Response Time</div>
+                                <div style="font-size: 0.8rem; color: #6b7280;">Avg Response Time</div>
                             </div>
                             <div style="text-align: center;">
                                 <div style="font-size: 1.5rem; font-weight: bold; color: #8b5cf6;">99.2%</div>
-                                <div style="font-size: 0.8rem; color: #9ca3af;">Data Accuracy</div>
+                                <div style="font-size: 0.8rem; color: #6b7280;">Data Accuracy</div>
                             </div>
                             <div style="text-align: center;">
                                 <div style="font-size: 1.5rem; font-weight: bold; color: #f59e0b;">156</div>
-                                <div style="font-size: 0.8rem; color: #9ca3af;">Total Processes</div>
+                                <div style="font-size: 0.8rem; color: #6b7280;">Total Processes</div>
                             </div>
                         </div>
                     </div>
@@ -778,10 +652,7 @@
                                 <div class="transaction-info">
                                     <p class="tx-id">Tx/No: <?= $transaction['tx_no'] ?? 'N/A' ?></p>
                                     <p class="patient-name"><?= $transaction['patient_name'] ?? 'Unknown' ?></p>
-                                    <small>
-                                        <?= isset($transaction['date']) ? $transaction['date'] : (isset($transaction['created_at']) ? date('M d, Y', strtotime($transaction['created_at'])) : 'N/A') ?>
-                                    </small>
-
+                                    <small><?= $transaction['date'] ?? 'N/A' ?></small>
                                 </div>
                                 <div class="transaction-status">
                                     <span class="badge <?= strtolower($transaction['status'] ?? 'completed') ?>">
@@ -823,6 +694,9 @@
                     <div class="appointments-section">
                         <div class="section-header">
                             <h3>Today's Appointments</h3>
+                            <a href="<?= site_url('appointments/create') ?>" class="btn btn-primary">
+                                <i class="fas fa-plus"></i> Add Appointment
+                            </a>
                         </div>
 
                         <?php 
@@ -869,8 +743,8 @@
                                             <td><?= $appt['purpose'] ?></td>
                                             <td>
                                                 <span class="badge" style="background: <?= 
-                                                    $appt['status'] == 'Confirmed' ? 'rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4)' : 
-                                                    ($appt['status'] == 'Pending' ? 'rgba(251, 191, 36, 0.2); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.4)' : 'rgba(107, 114, 128, 0.2); color: #9ca3af; border: 1px solid rgba(107, 114, 128, 0.4)')
+                                                    $appt['status'] == 'Confirmed' ? '#10b981' : 
+                                                    ($appt['status'] == 'Pending' ? '#f59e0b' : '#6b7280')
                                                 ?>;">
                                                     <?= $appt['status'] ?>
                                                 </span>
@@ -890,8 +764,11 @@
                             </div>
                         <?php else: ?>
                             <div class="text-center text-muted py-4">
-                                <i class="fas fa-calendar-times fa-2x mb-2" style="color: rgba(16, 185, 129, 0.3);"></i>
+                                <i class="fas fa-calendar-times fa-2x mb-2"></i>
                                 <p>No appointments for today</p>
+                                <a href="<?= site_url('appointments/create') ?>" class="btn btn-primary mt-3">
+                                    <i class="fas fa-plus"></i> Schedule Appointment
+                                </a>
                             </div>
                         <?php endif; ?>
                         
