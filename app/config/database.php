@@ -63,7 +63,7 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
         'port'		=> '3306',
         'username'	=> 'sql12809110',
         'password'	=> '8yECb1f9WE',
-        'database'	=> 'mockdata',
+        'database'	=> 'sql12809110',
         'charset'	=> 'utf8mb4',
         'dbprefix'	=> '', // Optional for SQLite
         'path'      => ''
