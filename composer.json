@@ -1,6 +1,11 @@
 {
-    "require" : {
+    "require": {
         "php": "^8.0",
+        "ext-pdo": "*",
+        "ext-mbstring": "*",
+        "ext-json": "*",
         "phpmailer/phpmailer": "^7.0"
-    }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
 }
