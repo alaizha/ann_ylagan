@@ -39,9 +39,6 @@ class Patient_model extends Model
         return $this->append_age($patient);
     }
 
-    /* ---------------------------------------------------------
-        GET PATIENT BY ID (used in Appointments)
-    --------------------------------------------------------- */
     public function get_patient_by_id($id)
     {
         $patient = $this->db->table($this->table)->where('id', $id)->get();
@@ -53,17 +50,19 @@ class Patient_model extends Model
     --------------------------------------------------------- */
     private function calculate_age($birth_date)
     {
-        if (empty($birth_date) || $birth_date == '0000-00-00') {
+        if (empty($birth_date) || $birth_date == '0000-00-00' || $birth_date == null) {
             return 'N/A';
         }
 
-        try {
-            $birth = new DateTime($birth_date);
-            $today = new DateTime();
-            return $today->diff($birth)->y;
-        } catch (Exception $e) {
-            return 'N/A';
+        $birth = date_create($birth_date);
+        $today = date_create();
+        
+        if ($birth && $today) {
+            $diff = date_diff($birth, $today);
+            return $diff->y;
         }
+        
+        return 'N/A';
     }
 
     /* ---------------------------------------------------------
@@ -75,15 +74,21 @@ class Patient_model extends Model
             return $data;
         }
 
-        // Single record (associative array)
-        if (isset($data['id'])) {
+        // If result is a single patient (associative array)
+        if (isset($data['id']) && is_array($data)) {
             $data['age'] = $this->calculate_age($data['birth_date'] ?? null);
             return $data;
         }
 
-        // Multiple records
-        foreach ($data as &$patient) {
-            $patient['age'] = $this->calculate_age($patient['birth_date'] ?? null);
+        // If result is a list of patients
+        if (is_array($data)) {
+            foreach ($data as &$patient) {
+                if (isset($patient['birth_date'])) {
+                    $patient['age'] = $this->calculate_age($patient['birth_date']);
+                } else {
+                    $patient['age'] = 'N/A';
+                }
+            }
         }
 
         return $data;
@@ -94,7 +99,7 @@ class Patient_model extends Model
     --------------------------------------------------------- */
     public function insert_patient($data)
     {
-        if (!empty($data['birth_date'])) {
+        if (isset($data['birth_date'])) {
             $data['birth_date'] = date('Y-m-d', strtotime($data['birth_date']));
         }
 
@@ -103,7 +108,7 @@ class Patient_model extends Model
 
     public function update_patient($id, $data)
     {
-        if (!empty($data['birth_date'])) {
+        if (isset($data['birth_date'])) {
             $data['birth_date'] = date('Y-m-d', strtotime($data['birth_date']));
         }
 

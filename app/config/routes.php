@@ -123,15 +123,10 @@ $router->get('/iot-devices/delete/{id}', 'IotDevices::delete');
 $router->get('/appointments', 'Appointments::index');
 $router->get('/appointments/create', 'Appointments::create');
 $router->post('/appointments/create', 'Appointments::create');
-
-// remove this! (You do not have an add() method)
-// $router->post('/appointments/add', 'Appointments::add');
-
+$router->post('/appointments/add', 'Appointments::add');
 $router->get('/appointments/edit/{id}', 'Appointments::edit');
-$router->post('/appointments/edit/{id}', 'Appointments::edit');  // <-- this is correct
-
+$router->post('/appointments/update/{id}', 'Appointments::update');
 $router->get('/appointments/delete/{id}', 'Appointments::delete');
-
 
 // User management routes (admin only)
 $router->get('/users', 'UsersController::index');

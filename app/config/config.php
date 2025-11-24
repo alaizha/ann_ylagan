@@ -65,6 +65,7 @@ $config['VERSION']                 = '4.2.4';
 | Values: development and production
 */
 $config['ENVIRONMENT']             = 'development';
+$config['ENVIRONMENT']             = 'production';
 /*
 |--------------------------------------------------------------------------
 | Base Site URL
@@ -78,7 +79,7 @@ $config['ENVIRONMENT']             = 'development';
 | WARNING: You MUST set this value!
 |
 */
-$config['base_url'] = 'http://ann-ylagan.onrender.com/index.php';
+$config['base_url'] = 'http://localhost:3000/';
 
 /*
 |--------------------------------------------------------------------------
@@ -296,32 +297,4 @@ $config['csrf_token_name']         = 'csrf_test_name';
 $config['csrf_cookie_name']        = 'csrf_cookie_name';
 $config['csrf_expire']             = 7200;
 $config['csrf_regenerate']         = FALSE;
-
-
-/*
-|--------------------------------------------------------------------------
-| Email / SMTP Settings
-|--------------------------------------------------------------------------
-*/
-
-// Gmail SMTP (App password required)
-$config['smtp_host']   = 'smtp.gmail.com';
-$config['smtp_user']   = 'ylaganannalyzha@gmail.com';       // Sender Gmail
-$config['smtp_pass']   = 'ztkj adox ijru utiw';             // Gmail App Password
-$config['smtp_port']   = 587;
-$config['smtp_crypto'] = 'tls';                             // PHPMailer expects: tls or ssl
-
-// Admin who receives notifications
-$config['admin_email'] = 'annalyzhaylagan15@gmail.com';
-
-// Clinic Display Name
-$config['clinic_name'] = 'Purple Rain Clinic';
-
-
-//
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-
 ?>
